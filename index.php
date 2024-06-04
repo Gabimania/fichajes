@@ -43,26 +43,41 @@ $results = $stm->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fichajes</title>
+    <!-- Enlace a Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace a tu archivo CSS personalizado -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 
 <body>
-    <h1>Empresa Gabimania</h1>
-    <form method="POST" action="">
-        <input type="text" name="dni" id="dni" placeholder="DNI">
-        <input type="password" name="password" id="password" placeholder="Password">
-        <input type="submit" value="Sing in">
-    </form>
-    <?php foreach ($results as $r) : ?>
-        <h3>Employee: <?php echo $r['username'] ?> </h3>
-        <p>Clock in: <?php echo $r['entry'] ?> </p>
-        <p>Clock out: <?php echo $r['leaving'] ?> </p>
+    <div class="container">
+        <h1 class="mt-5">Empresa Gabimania</h1>
+        <form method="POST" action="" class="mt-4">
+            <div class="mb-3">
+                <label for="dni" class="form-label">DNI</label>
+                <input type="text" class="form-control" id="dni" name="dni" placeholder="DNI">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </form>
 
-    <?php endforeach; ?>
-    <?php
-    if (isset($error)) {
-        echo "<p class='error-msg'>" . $error . "</p>";
-    }
-    ?>
+        <?php foreach ($results as $r) : ?>
+            <div class="employee-info mt-4 border p-3">
+                <h3>Employee: <?php echo $r['username'] ?> </h3>
+                <p>Clock in: <?php echo $r['entry'] ?> </p>
+                <p>Clock out: <?php echo $r['leaving'] ?> </p>
+            </div>
+        <?php endforeach; ?>
+
+        <?php
+        if (isset($error)) {
+            echo "<p class='error-msg mt-4'>" . $error . "</p>";
+        }
+        ?>
+    </div>
 </body>
 
 </html>

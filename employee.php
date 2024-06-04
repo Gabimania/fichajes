@@ -48,26 +48,28 @@ if (isset($_POST["out"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 
 <body>
-    <h1>Welcome to Gabimania,<?php echo "<p>$name</p>" ?></h1>
-    <h2>It´s time to clock in?</h2>
-    <form method="post" action="">
-        <input type="submit" value="Clock in" name="clock">
-    </form>
-    <h2>It´s time to clock out</h2>
-    <form method="post" action="">
-        <input type="submit" value="Clock out" name="out">
-    </form>
-    <a href="index"><button>Volver</button></a>
-    <?php
-    if (isset($error)) {
-        echo "<p class='error-msg'>" . $error . "</p>";
-    }
-    ?>
-
-
+    <div class="container">
+        <h1 class="mt-5">Welcome to Gabimania, <?php echo "<span>$name</span>" ?></h1>
+        <h2 class="mt-4">It's time to clock in?</h2>
+        <form method="post" action="" class="mt-3">
+            <button type="submit" class="btn btn-primary">Clock in</button>
+        </form>
+        <h2 class="mt-4">It's time to clock out?</h2>
+        <form method="post" action="" class="mt-3">
+            <button type="submit" class="btn btn-danger">Clock out</button>
+        </form>
+        <a href="index" class="mt-4 btn btn-secondary">Volver</a>
+        <?php
+        if (isset($error)) {
+            echo "<p class='error-msg mt-4'>" . $error . "</p>";
+        }
+        ?>
+    </div>
 </body>
 
 </html>

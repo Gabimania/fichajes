@@ -1,0 +1,40 @@
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.employee-info {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.employee-info h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.error-msg {
+    color: red;
+    font-weight: bold;
+}
+
