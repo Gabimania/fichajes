@@ -1,0 +1,12 @@
+# Activar el motor de reescritura
+RewriteEngine On
+
+# Redirigir todas las solicitudes a PHP sin la extensión .php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Configurar el tipo de archivo y el juego de caracteres
+AddType application/x-httpd-php .php
+AddCharset UTF-8 .php
+
