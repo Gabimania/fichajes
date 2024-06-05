@@ -4,11 +4,20 @@ $iduser = $_SESSION["id"];
 $name = $_SESSION["username"];
 include("connection.php");
 if (isset($_POST["clock"])) {
-    $sql = "INSERT INTO clock_in (entry, user_id) VALUES (NOW(), ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(1, $iduser);
-    $stmt->execute();
-    header("Location: index");
+    $query = "SELECT * FROM clock_in where entry is not null and leaving is null and user_id= ?; ";
+    $sm = $conn->prepare($query);
+    $sm->bindParam(1, $iduser);
+    $sm->execute();
+    $results = $sm->fetchAll(PDO::FETCH_ASSOC);
+    if ($results > 0) {
+        echo "You have done the clock in before";
+    } else {
+        $sql = "INSERT INTO clock_in (entry, user_id) VALUES (NOW(), ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(1, $iduser);
+        $stmt->execute();
+        header("Location: index");
+    }
 }
 
 if (isset($_POST["out"])) {
@@ -49,21 +58,26 @@ if (isset($_POST["out"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 
 <body>
     <div class="container">
-        <h1 class="mt-5">Welcome to Gabimania, <?php echo "<span>$name</span>" ?></h1>
-        <h2 class="mt-4">It's time to clock in?</h2>
-        <form method="post" action="" class="mt-3">
-            <button type="submit" class="btn btn-primary">Clock in</button>
-        </form>
-        <h2 class="mt-4">It's time to clock out?</h2>
-        <form method="post" action="" class="mt-3">
-            <button type="submit" class="btn btn-danger">Clock out</button>
-        </form>
+        <h1 class="mt-5">Welcome to X, <?php echo "<span>$name</span>" ?></h1>
+
+        <div class="inline-forms-container mt-4">
+            <h2>It's time to clock in?</h2>
+            <form method="post" action="" class="inline-form">
+                <button type="submit" class="btn btn-primary" name="clock">Clock in</button>
+            </form>
+            <h2>It's time to clock out?</h2>
+            <form method="post" action="" class="inline-form">
+                <button type="submit" class="btn btn-danger" name="out">Clock out</button>
+            </form>
+        </div>
+
         <a href="index" class="mt-4 btn btn-secondary">Volver</a>
+
         <?php
         if (isset($error)) {
             echo "<p class='error-msg mt-4'>" . $error . "</p>";

@@ -44,13 +44,13 @@ $results = $stm->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fichajes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="mt-5">Empresa Gabimania</h1>
-        <form method="POST" action="" class="mt-4">
+<div class="container">
+        <h1 class="mt-5 text-center " id="index">Empresa X</h1>
+        <form method="POST" action="" class="mt-4 form-container">
             <div class="mb-3">
                 <label for="dni" class="form-label">DNI</label>
                 <input type="text" class="form-control" id="dni" name="dni" placeholder="DNI">
@@ -62,13 +62,15 @@ $results = $stm->fetchAll(PDO::FETCH_ASSOC);
             <button type="submit" class="btn btn-primary">Sign in</button>
         </form>
 
-        <?php foreach ($results as $r) : ?>
-            <div class="employee-info mt-4 border p-3">
-                <h3>Employee: <?php echo $r['username'] ?> </h3>
-                <p>Clock in: <?php echo $r['entry'] ?> </p>
-                <p>Clock out: <?php echo $r['leaving'] ?> </p>
-            </div>
-        <?php endforeach; ?>
+        <div class="cards-container">
+            <?php foreach ($results as $r) : ?>
+                <div class="employee-info mt-4 border p-3">
+                    <h3>Employee: <?php echo $r['username'] ?> </h3>
+                    <p>Clock in: <?php echo $r['entry'] ?> </p>
+                    <p>Clock out: <?php echo $r['leaving'] ?> </p>
+                </div>
+            <?php endforeach; ?>
+        </div>
 
         <?php
         if (isset($error)) {

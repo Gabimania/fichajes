@@ -1,6 +1,12 @@
-
 form {
     margin-bottom: 20px;
+}
+#index{
+    color:#007bff;
+}
+
+.mt-5 text-center{
+    color:#007bff;
 }
 
 input[type="text"],
@@ -21,11 +27,38 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
 .employee-info {
-    margin-bottom: 20px;
-    padding: 10px;
+    margin: 10px;
+    padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.3s;
+    flex: 1 1 calc(25% - 20px); /* Adjusts the width of each card */
+    box-sizing: border-box;
+}
+
+.employee-info:hover {
+    transform: scale(1.05);
+}
+
+.error-msg {
+    color: red;
+    font-weight: bold;
+    text-align: center;
 }
 
 .employee-info h3 {
@@ -33,8 +66,19 @@ input[type="submit"] {
     margin-bottom: 10px;
 }
 
-.error-msg {
-    color: red;
-    font-weight: bold;
+.inline-forms-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px; /* Espacio entre los formularios y los encabezados */
+    text-align: center;
 }
 
+.inline-forms-container h2 {
+    margin: 0 10px; /* Espacio entre el título y los formularios */
+}
+
+form.inline-form {
+    margin: 0;
+}
