@@ -4,12 +4,12 @@ $iduser = $_SESSION["id"];
 $name = $_SESSION["username"];
 include("connection.php");
 if (isset($_POST["clock"])) {
-    $query = "SELECT * FROM clock_in where entry is not null and leaving is null and user_id= ?; ";
+    $query = "SELECT * FROM clock_in where entry is not null and leaving is null and user_id= ? ";
     $sm = $conn->prepare($query);
     $sm->bindParam(1, $iduser);
     $sm->execute();
     $results = $sm->fetchAll(PDO::FETCH_ASSOC);
-    if ($results > 0) {
+    if (count($results) > 0) {
         echo "You have done the clock in before";
     } else {
         $sql = "INSERT INTO clock_in (entry, user_id) VALUES (NOW(), ?)";
@@ -26,14 +26,16 @@ if (isset($_POST["out"])) {
         $s = $conn->prepare($sqll);
         $s->bindParam(1, $iduser);
         $s->execute();
-        if ($s->rowCount() > 0) {
+        $res = $s->fetchAll(PDO::FETCH_ASSOC);
+        if (count($res) > 0) {
             echo "Is is not allowed to sing in the clock out if there is not registered the clock in. You should speack with Human Resources Departement for trying to insert your clock in manually";
         } else {
             $sql1 = "SELECT * FROM fichajes.clock_in where leaving is null and user_id = ?";
             $st = $conn->prepare($sql1);
             $st->bindParam(1, $iduser);
             $st->execute();
-            if ($st->rowCount() > 0) {
+            $re = $st->fetchAll(PDO::FETCH_ASSOC);
+            if (count($re) > 0) {
                 $sql2 = "UPDATE clock_in SET leaving = NOW() WHERE user_id = ?";
                 $stm = $conn->prepare($sql2);
                 $stm->bindParam(1, $iduser);
